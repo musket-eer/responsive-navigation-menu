@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background: #333;
+            padding: 10px 20px;
+            transition: background 0.3s ease; /* Smooth transition effect */
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            margin: 0 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+        }
+
+        .menu li a:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        /* Mobile Styles */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                flex-direction: column;
+                display: none; /* Hide menu by default */
+                width: 100%;
+                background: #333;
+            }
+
+            .menu li {
+                text-align: center;
+                margin: 5px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                background: #444;
+                padding: 10px;
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <button class="menu-toggle" id="menuButton">☰ Menu</button>
+    <ul class="menu">
+        <li><a href="#" onclick="changeColor()">Home</a></li>
+        <li><a href="#" onclick="changeColor()">About</a></li>
+        <li><a href="#" onclick="changeColor()">Contact</a></li>
+    </ul>
+</nav>
+
+<script>
+    // Toggle menu visibility
+    document.querySelector(".menu-toggle").addEventListener("click", function() {
+        document.querySelector(".menu").classList.toggle("open");
+    });
+
+    // Add styles when menu is open
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .menu.open {
+            display: flex;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Change navbar color on click
+    function changeColor() {
+        const navbar = document.getElementById("navbar");
+        const colors = ["#333", "#1e3a8a", "#be123c", "#15803d", "#b45309"]; // Array of colors
+        const currentColor = navbar.style.background;
+        let newColor;
+
+        // Get a new color different from the current one
+        do {
+            newColor = colors[Math.floor(Math.random() * colors.length)];
+        } while (newColor === currentColor);
+
+        navbar.style.background = newColor;
+    }
+</script>
+
+</body>
+</html>
